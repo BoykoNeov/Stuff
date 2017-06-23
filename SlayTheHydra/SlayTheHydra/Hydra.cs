@@ -1,12 +1,20 @@
-﻿namespace SlayTheHydra
+﻿/// <summary>
+/// Inspired by PBS series "Kill the mathematical Hydra"
+/// </summary>
+namespace SlayTheHydra
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
+    /// <summary>
+    /// Mathematical Hydra
+    /// </summary>
+    /// <typeparam name="T">type of T values in Hydra's heads</typeparam>
     public class Hydra<T>
     {
+        const int HeadsGrowingFactor = 2;
         public Head<T> Body { get; set; }
         public long HeadCount { get; set; }
 
@@ -61,7 +69,7 @@
                 currentHeadLineage.Reverse();
                 currentHeadLineage.RemoveAt(0);
 
-                const string joinerBase = "|";
+                const string JoinerBase = "|";
                 string joiner = string.Empty;
 
                 StringBuilder sb = new StringBuilder();
@@ -69,7 +77,7 @@
 
                 foreach (T value in currentHeadLineage)
                 {
-                    joiner = string.Concat(joiner, joinerBase);
+                    joiner = string.Concat(joiner, JoinerBase);
                     sb.Append($"{string.Concat(value, " ", joiner, " ")}");
                 }
 
@@ -91,32 +99,42 @@
             GrowHeads(currentHead);
         }
 
+        /// <summary>
+        /// Copy the subtree, starting with the specified head (main target to grow the hydra after choping a head);
+        /// </summary>
+        /// <param name="currentHead"></param>
         public void GrowHeads(Head<T> currentHead)
         {
-            // Heads attached directly to the body are choped without inducing growth of new heads (the hydra must be defeated at some point, after all)
-            if (currentHead.Parent == null)
+            for (int i = 0; i < HeadsGrowingFactor; i++)
             {
-                return;
-            }
-
-            Queue<Head<T>> growQueue = new Queue<Head<T>>();
-            Queue<Head<T>> growingHeadsQueue = new Queue<Head<T>>();
-
-            growQueue.Enqueue(currentHead);
-            growingHeadsQueue.Enqueue(currentHead);
-
-            while (growQueue.Count > 0)
-            {
-                Head<T> queueCurrentHead = growQueue.Dequeue();
-
-                foreach (Head<T> head in queueCurrentHead.SubHeads)
+                // Heads attached directly to the body are choped without inducing growth of new heads (the hydra must be defeated at some point, after all)
+                if (currentHead == this.Body)
                 {
-                    growQueue.Enqueue(head);
-                    growingHeadsQueue.Enqueue(head);
+                    return;
                 }
+
+                Head<T> newHead = new Head<T>(currentHead.Value, currentHead.Parent);
+                currentHead.Parent.SubHeads.Add(newHead);
+                this.HeadCount++;
+
+                CopyAllSubHeads(currentHead, newHead);
             }
+        }
 
-
+        /// <summary>
+        /// Private recursive method for copying a subtree of the hydra
+        /// </summary>
+        /// <param name="currentHead">original parent/ source</param>
+        /// <param name="newHead">target parent/ target</param>
+        private void CopyAllSubHeads(Head<T> currentHead, Head<T> newHead)
+        {
+            foreach (Head<T> head in currentHead.SubHeads)
+            {
+                Head<T> newChildHead = new Head<T>(head.Value, newHead);
+                newHead.SubHeads.Add(newChildHead);
+                this.HeadCount++;
+                CopyAllSubHeads(head, newChildHead);
+            }
         }
 
         /// <summary>
@@ -124,8 +142,8 @@
         /// </summary>
         public void DrawHydra()
         {
-            const string leftPadding = " ";
-            DrawHydra(this.Body, leftPadding);
+            const string LeftPadding = " ";
+            DrawHydra(this.Body, LeftPadding);
             Console.WriteLine($"{Environment.NewLine}Heads:{this.HeadCount}");
         }
 
@@ -144,6 +162,34 @@
             }
         }
 
+        public long Slay()
+        {
+            long numberOfSteps = 0;
+
+            while (this.Body.SubHeads.Count > 0)
+            {
+                Head<T> terminalHead = this.Body;
+
+                while (terminalHead.SubHeads.Count > 0)
+                {
+                    terminalHead = terminalHead.SubHeads[0];
+                }
+
+                terminalHead.Parent.SubHeads.RemoveAt(0);
+                this.HeadCount--;
+                numberOfSteps++;
+                GrowHeads(terminalHead.Parent);
+                // this.DrawHydra();
+                // Console.WriteLine($"Heads count: {this.HeadCount}");
+            }
+
+            return numberOfSteps;
+        }
+
+        /// <summary>
+        /// A hydra's head
+        /// </summary>
+        /// <typeparam name="T">Head value</typeparam>
         public class Head<T>
         {
             //let's assign a value to heads for a better visualization (and maybe more ideas in the future)
