@@ -179,7 +179,15 @@ namespace SlayTheHydra
                 this.HeadCount--;
                 numberOfSteps++;
                 GrowHeads(terminalHead.Parent);
-                // this.DrawHydra();
+                
+                if (numberOfSteps % 100000 == 0)
+                {
+                 //   Console.WriteLine("----------------------");
+                    Console.WriteLine($"Number of heads: {this.HeadCount} heads");
+                  //   this.DrawHydra();
+                  //  Console.WriteLine("----------------------");
+                }
+
                 // Console.WriteLine($"Heads count: {this.HeadCount}");
             }
 

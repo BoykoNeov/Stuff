@@ -16,9 +16,14 @@ namespace SlayTheHydra
             hydra.AddHead(1);
             hydra.AddHead(2, 0);
             hydra.AddHead(2, 0);
+            hydra.AddHead(2, 0);
+
+            // hydra.AddHead(3, 0, 0);
+            hydra.AddHead(3, 0, 0);
             hydra.AddHead(3, 0, 0);
 
-            //hydra.AddHead(4, 0, 0, 0);
+
+            //  hydra.AddHead(4, 0, 0, 0);
             //hydra.AddHead(4, 0, 0, 0);
 
             //  hydra.GrowHeads(hydra.Body.SubHeads[0].SubHeads[2]);
