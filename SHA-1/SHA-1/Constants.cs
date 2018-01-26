@@ -1,6 +1,6 @@
 ﻿namespace SHA_1
 {
-    internal class Constants
+    internal static class Constants
     {
         // initial hash values
         internal const uint H0 = 1732584193; // 67452301 in hex
