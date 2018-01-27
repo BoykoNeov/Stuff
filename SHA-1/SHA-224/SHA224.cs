@@ -1,11 +1,11 @@
-﻿namespace SHA_256
+﻿namespace SHA_224
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    public static class SHA256
+    public static class SHA224
     {
         public static string Calculate(string input)
         {
@@ -57,8 +57,8 @@
                 overallHashes[7] += h;
             }
 
-            // display result
-            string result = string.Join("", overallHashes.Select(x => Convert.ToString(x, 16).PadLeft(8, '0')));
+            // display result. Result is trimmed to 224 bits
+            string result = string.Join("", overallHashes.Select(x => Convert.ToString(x, 16).PadLeft(8, '0'))).Substring(0, 56);
             return result;
         }
 

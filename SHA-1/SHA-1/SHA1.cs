@@ -21,8 +21,8 @@
 
             for (int j = 0; j < blocks.Length; j++)
             {
+                // prepare message schedule
                 List<uint> words = SplitToChunks(blocks[j], 32).Select(x => Convert.ToUInt32(x, 2)).ToList();
-
                 for (int i = 16; i < 80; i++)
                 {
                     // Perform XOR
@@ -87,21 +87,21 @@
         {
             uint result = 0;
 
-            if (round <= 19)
+            if (round <= 19) // Ch
             {
                 result = (b & c) | ((~b) & d);
             }
-            else if (round <= 39)
+            else if (round <= 39) // Parity
             {
                 result = b ^ c ^ d;
             }
-            else if (round <= 59)
+            else if (round <= 59) // Maj
             {
                 result = (b & c) | (b & d) | (c & d);
             }
             else
             {
-                result = b ^ c ^ d;
+                result = b ^ c ^ d; // Parity
             }
 
             return result;

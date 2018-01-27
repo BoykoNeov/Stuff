@@ -1,4 +1,4 @@
-﻿namespace SHA_256
+﻿namespace SHA_224
 {
     using System;
 
@@ -7,7 +7,7 @@
         public static void Main()
         {
             string input = Console.ReadLine();
-            Console.WriteLine(SHA256.Calculate(input));
+            Console.WriteLine(SHA224.Calculate(input));
         }
     }
 }
