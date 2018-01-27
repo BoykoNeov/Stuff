@@ -33,7 +33,7 @@
                     words.Add(currentWord);
                 }
 
-                // initialize working variables with constants
+                // initialize working variables
                 uint a = overallHashes[0];
                 uint b = overallHashes[1];
                 uint c = overallHashes[2];
