@@ -1,6 +1,6 @@
-﻿namespace SHA_224
+﻿namespace SHA_256
 {
-    internal class Constants
+    internal class SHA256Constants
     {
         internal static readonly uint[] KConstants =
          {
@@ -20,19 +20,19 @@
             0x391C0CB3, 0x4ED8AA4A, 0x5B9CCA4F, 0x682E6FF3,
             0x748F82EE, 0x78A5636F, 0x84C87814, 0x8CC70208,
             0x90BEFFFA, 0xA4506CEB, 0xBEF9A3F7, 0xC67178F2,
-         };
+        };
 
-        // Those initial constants differ from SHA-256
         internal static readonly uint[] InitialHashes =
          {
-           0xC1059ED8,
-           0x367CD507,
-           0x3070DD17,
-           0xF70E5939,
-           0xFFC00B31,
-           0x68581511,
-           0x64F98FA7,
-           0xBEFA4FA4
+            0x6A09E667,
+            0xBB67AE85,
+            0x3C6EF372,
+            0xA54FF53A,
+            0x510E527F,
+            0x9B05688C,
+            0x1F83D9AB,
+            0x5BE0CD19
          };
+
     }
 }

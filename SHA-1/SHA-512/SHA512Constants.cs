@@ -1,6 +1,6 @@
 ﻿namespace SHA_512
 {
-    internal class Constants
+    internal class SHA512Constants
     {
         internal static readonly ulong[] KConstants =
          {
