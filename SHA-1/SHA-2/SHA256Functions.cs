@@ -106,7 +106,7 @@
             string message = convertedToBinary + "1";
 
             // Pad to 448 (448 + 64 bits for message length = 512)
-            if (message.Length % 448 > 0)
+            if ((message.Length % 512) % 448 > 0)
             {
                 message = message.PadRight((((message.Length + 63) / 512) + 1) * 512 - 64, '0');
             }
