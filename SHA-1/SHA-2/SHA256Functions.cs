@@ -100,15 +100,15 @@
             }
 
             string convertedToBinary = sb.ToString();
-            string messageLengthInBinary = Convert.ToString(convertedToBinary.Length, 2).PadLeft(64, '0');
+            string messageLengthInBinary = Convert.ToString(convertedToBinary.Length, 2).PadLeft(128, '0');
 
             // Add 1
             string message = convertedToBinary + "1";
 
             // Pad to 448 (448 + 64 bits for message length = 512)
-            if ((message.Length % 512) % 448 > 0)
+            if ((message.Length + 128 % 512) > 0)
             {
-                message = message.PadRight((((message.Length + 63) / 512) + 1) * 512 - 64, '0');
+                message = message.PadRight((((message.Length + 127) / 512) + 1) * 512 - 128, '0');
             }
 
             message = message + messageLengthInBinary;

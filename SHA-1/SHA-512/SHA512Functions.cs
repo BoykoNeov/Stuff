@@ -31,7 +31,7 @@
             string message = convertedToBinary + "1";
 
             // Pad to 896 (896 + 128 bits for message length = 1024)
-            if ((message.Length % 1024) % 896 > 0)
+            if (message.Length  + 128 % 1024 > 0)
             {
                 message = message.PadRight((((message.Length + 127) / 1024) + 1) * 1024 - 128, '0');
             }
