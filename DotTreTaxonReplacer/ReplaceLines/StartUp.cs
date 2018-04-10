@@ -11,7 +11,7 @@ public class StartUp
     /// </summary>
     public static void Main()
     {
-        Console.WriteLine("Enter source file path containing dictionary in the format 'whattoseek - whattoreplace' :");
+        Console.WriteLine("Enter source file path containing dictionary in the format 'withthat - replacethis' :");
         string diciotnaryFilePath = Console.ReadLine();
         string[] dictInput = File.ReadAllLines(diciotnaryFilePath);
 
@@ -45,7 +45,7 @@ public class StartUp
 
             foreach (KeyValuePair<string,string> dictionaryEntry in replacingDictionary)
             {
-                outputLine = outputLine.Replace(dictionaryEntry.Key, dictionaryEntry.Value + "_" + dictionaryEntry.Key);
+                outputLine = outputLine.Replace(dictionaryEntry.Key, dictionaryEntry.Value);
             }
 
             sb.AppendLine(outputLine);
