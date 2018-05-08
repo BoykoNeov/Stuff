@@ -7,7 +7,7 @@ public class StartUp
 {
     public static void Main()
     {
-        const int ArraysToCycle = 200;
+        const int ArraysToCycle = 5200;
         const int ArraySize = 10_000;
 
         Console.WriteLine("Enter file path with file name: ");
@@ -28,23 +28,54 @@ public class StartUp
 
         for (int j = 0; j < ArraysToCycle; j++)
         {
+            byte tries = 0;
             byte[] bytes = new byte[ArraySize];
             for (int i = 0; i < ArraySize; i++)
             {
-                var portInput = port.ReadLine();
+                if (tries >= 10)
+                {
+                    Console.WriteLine("Tried 10 times");
+                    break;
+                }
+
+                string portInput = string.Empty;
+
+                try
+                {
+                    portInput = port.ReadLine();
+                    if (tries > 1)
+                    {
+                        tries--;
+                    }
+                }
+                catch
+                {
+                    Console.WriteLine("Error reading from port");
+                    i--;
+                    tries++;
+                    continue;
+                }
 
                 try
                 {
                     bytes[i] = byte.Parse(portInput);
+                    if (tries > 1)
+                    {
+                        tries--;
+                    }
                 }
                 catch
                 {
+                    tries++;
                     Console.WriteLine($"Error parsing: {portInput}");
-                    if (i > 0)
-                    {
-                        i--;
-                    }
+                    i--;
+                    continue;
                 }
+            }
+
+            if (tries >= 10)
+            {
+                break;
             }
 
             Console.WriteLine($"Processed this far: {(j + 1) * ArraySize}");

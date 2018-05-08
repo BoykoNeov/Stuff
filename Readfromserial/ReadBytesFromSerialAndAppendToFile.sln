@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2043
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadBytesFromSerialAndAppendToFile", "ReadBytesFromSerialAndAppendToFile.csproj", "{BEC7C333-A86D-41A6-B53A-D7E120428DAA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BEC7C333-A86D-41A6-B53A-D7E120428DAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEC7C333-A86D-41A6-B53A-D7E120428DAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEC7C333-A86D-41A6-B53A-D7E120428DAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEC7C333-A86D-41A6-B53A-D7E120428DAA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D7106434-111F-4FD1-8EE0-0CE14641FBAB}
+	EndGlobalSection
+EndGlobal
