@@ -10,8 +10,12 @@ public class StartUp
         const int ArraysToCycle = 5200;
         const int ArraySize = 10_000;
 
-        Console.WriteLine("Enter file path with file name: ");
-        string filePath = Console.ReadLine();
+        string filePath;
+
+        // Console.WriteLine("Enter file path with file name: ");
+        // filePath = Console.ReadLine();
+
+        filePath = @"F:\temp\random\v15.raw";
 
         if (!File.Exists(filePath))
         {
